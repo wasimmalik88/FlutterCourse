@@ -56,4 +56,7 @@ void main() {
   List numbers = [43, 89, 99, 13, 7, 88, 1, 22, 33];
   numbers.sort();
   print(numbers.reversed);
+  print(stdNames);
+  stdNames.removeWhere((elem) => elem != "Wasim");
+  print(stdNames);
 }
