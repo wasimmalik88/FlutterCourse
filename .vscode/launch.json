@@ -8,7 +8,7 @@
             "name": "Dart & Flutter",
             "request": "launch",
             "type": "dart",
-             "program": "class6.dart",
+             "program": "asgn6.dart",
         }
     ]
 }
