@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 void main() {
   //  Q1. Write a program that prints the
@@ -11,15 +12,15 @@ void main() {
   // Output:
   // 0 1 1 2 3 5 8
 
-  // // // // // // // int? n = int.parse(stdin.readLineSync()!);
-  // // // // // // // int oldNum = 0;
-  // // // // // // // int newNum = 1;
-  // // // // // // // for (var i = 1; i <= n; i++) {
-  // // // // // // //   print(oldNum);
-  // // // // // // //   int temp = oldNum + newNum;
-  // // // // // // //   oldNum = newNum;
-  // // // // // // //   newNum = temp;
-  // // // // // // // }
+  int? n = int.parse(stdin.readLineSync()!);
+  int oldNum = 0;
+  int newNum = 1;
+  for (var i = 1; i <= n; i++) {
+    print(oldNum);
+    int temp = oldNum + newNum;
+    oldNum = newNum;
+    newNum = temp;
+  }
   // Q2.  Implement a code that finds the
   // largest element in a list using a for loop.
 
@@ -53,12 +54,12 @@ void main() {
   // ...
   // ...
   // 5 x 10 = 50
-  // // // // print("enter number");
+  print("enter number");
 
-  // // // // int? number = int.parse(stdin.readLineSync()!);
-  // // // // for (var i = 1; i <= 10; i++) {
-  // // // //   print("$number x $i= ${i * number}");
-  // // // // }
+  int? number = int.parse(stdin.readLineSync()!);
+  for (var i = 1; i <= 10; i++) {
+    print("$number x $i= ${i * number}");
+  }
 
   // Q4. Implement a function that checks if a given string is a
   // palindrome.
@@ -70,12 +71,12 @@ void main() {
 
   // Output:
   // "radar" is a palindrome.
-  // // // String strInput = stdin.readLineSync()!;
-  // // // String rev = strInput.split('').reversed.join('');
-  // // // if (strInput == rev)
-  // // //   print("Plandrome");
-  // // // else
-  // // //   print("Not Plandrome");
+  String strInput = stdin.readLineSync()!;
+  String rev = strInput.split('').reversed.join('');
+  if (strInput == rev)
+    print("Plandrome");
+  else
+    print("Not Plandrome");
   // Q5. Write a program to make such a
   // pattern like a right angle triangle with a number which will repeat a number in
   // a row. The pattern like :
@@ -96,14 +97,63 @@ void main() {
   // of numbers as input and prints the numbers greater than 5 using a for loop and
   // if-else condition.
 
+  var lstNum = [];
+  for (var i = 0; i < 5; i++) {
+    int? number = int.parse(stdin.readLineSync()!);
+    lstNum.add(number);
+  }
+  print("Numbers in list that are greater than 5");
+  for (var i = 0; i < 5; i++) {
+    if (lstNum[i] > 5) {
+      print(lstNum[i]);
+    }
+  }
+
   // Q7.  Write a program that counts the
   // number of vowels in a given string using a for loop and if-else condition.
+  String strString = stdin.readLineSync()!;
+  int count = 0;
+  for (var i = 0; i < strString.length; i++) {
+    if (strString[i] == 'a')
+      count++;
+    else if (strString[i] == 'e')
+      count++;
+    else if (strString[i] == 'i')
+      count++;
+    else if (strString[i] == 'o')
+      count++;
+    else if (strString[i] == 'u')
+      count++;
+    else {}
+  }
+  print(count);
 
   // Q8. Write a Dart program that counts the number of digits in a given number using a while loop.
-
+  number = int.parse(stdin.readLineSync()!);
+  count = 0;
+  int nn = number;
+  while (nn != 0) {
+    nn ~/= 10;
+    count++;
+  }
+  print(count);
   // Q9. Implement Dart code to generate a random password of a given length using a while loop.
-
+  String password = "";
+  while (password.length < 10) {
+    var intValue = Random().nextInt(10);
+    password = password + intValue.toString();
+  }
+  print(password);
   // Q10. Create a Dart program that checks if a given string is empty or not using if-else statements.
   //                                                         OR
   // Q10. Implement Dart code to print the multiplication table of a given number using a while loop.
+
+  print("enter number");
+
+  number = int.parse(stdin.readLineSync()!);
+  var i = 1;
+  while (i <= 10) {
+    print("$number x $i= ${i * number}");
+    i++;
+  }
 }
