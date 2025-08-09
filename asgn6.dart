@@ -11,7 +11,7 @@ void main() {
 
   // Output:
   // 0 1 1 2 3 5 8
-
+  print("enter number");
   int? n = int.parse(stdin.readLineSync()!);
   int oldNum = 0;
   int newNum = 1;
