@@ -8,7 +8,7 @@
             "name": "Dart & Flutter",
             "request": "launch",
             "type": "dart",
-             "program": "class7.dart",
+             "program": "Class8 OOP\\class8.dart",
         }
     ]
 }
