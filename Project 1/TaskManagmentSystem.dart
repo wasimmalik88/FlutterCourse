@@ -2,9 +2,9 @@
 import 'dart:io';
 
 List<Map<String, dynamic>> listOfTask = [
-  {'desc': 'Do laundry', 'priority': 3, 'isdone': false},
+  {'desc': 'Do laundry', 'priority': 3, 'isdone': true},
   {'desc': 'Clean the bathroom', 'priority': 2, 'isdone': false},
-  {'desc': 'Pay bills', 'priority': 1, 'isdone': true},
+  {'desc': 'Pay bills', 'priority': 1, 'isdone': false},
   {'desc': 'Call family member', 'priority': 3, 'isdone': false},
   {'desc': 'Exercise', 'priority': 1, 'isdone': true},
   {'desc': 'Read a book', 'priority': 2, 'isdone': false},
@@ -12,6 +12,7 @@ List<Map<String, dynamic>> listOfTask = [
 ];
 
 void PrintTask() {
+  listOfTask.sort((a, b) => a['priority'].compareTo(b['priority']));
   clearScreen();
   int count = 0;
   for (var item in listOfTask) {
