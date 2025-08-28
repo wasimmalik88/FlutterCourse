@@ -1,6 +1,11 @@
 // A list of maps with initial data
 import 'dart:io';
 
+TextColor? UrgentColor = TextColor.red;
+TextColor? HighColor = TextColor.yellow;
+TextColor? NormalColor = TextColor.white;
+String Error = "";
+
 List<Map<String, dynamic>> listOfTask = [
   {'desc': 'Do laundry', 'priority': 3, 'isdone': true},
   {'desc': 'Clean the bathroom', 'priority': 2, 'isdone': false},
@@ -19,21 +24,21 @@ void PrintTask() {
     if (item["priority"] == 1)
       printColored(
         "${++count} : ${item["desc"]} ",
-        textColor: TextColor.red,
+        textColor: UrgentColor,
         bold: true,
         Strikethrough: item["isdone"],
       );
     else if (item["priority"] == 2)
       printColored(
         "${++count} : ${item["desc"]} ",
-        textColor: TextColor.yellow,
+        textColor: HighColor,
         bold: true,
         Strikethrough: item["isdone"],
       );
     else if (item["priority"] == 3)
       printColored(
         "${++count} : ${item["desc"]} ",
-        textColor: TextColor.white,
+        textColor: NormalColor,
         bold: false,
         Strikethrough: item["isdone"],
       );
@@ -59,15 +64,91 @@ void AddTask() {
 }
 
 void DoneTask(int TaskNumber) {
+  if (TaskNumber > listOfTask.length) {
+    Error = "Error!! Task Number does not exist";
+    return;
+  }
   listOfTask[TaskNumber - 1]["isdone"] = true;
 }
 
 void DeleteTask(int TaskNumber) {
+  if (TaskNumber > listOfTask.length) {
+    Error = "Error!! Task Number does not exist";
+    return;
+  }
   listOfTask.remove(listOfTask[TaskNumber - 1]);
 }
 
 void DeleteCompleted() {
   listOfTask.removeWhere((task) => task['isdone'] == true);
+}
+
+TextColor? textColorFromString(String input) {
+  for (var color in TextColor.values) {
+    if (color.name.toLowerCase() == input.toLowerCase()) {
+      return color;
+    }
+  }
+  return null;
+}
+
+void ColorChange() {
+  print(
+    'Enter a color for urgent priority (black, red, green, yellow, blue, magenta, cyan, white):',
+  );
+
+  String? input = stdin.readLineSync();
+
+  if (input != null) {
+    TextColor? selectedColor = textColorFromString(input);
+
+    if (selectedColor != null) {
+      print('You selected: ${selectedColor.name}');
+      UrgentColor = selectedColor;
+    } else {
+      print('Invalid color!');
+    }
+  } else {
+    print('No input received.');
+  }
+
+  print(
+    'Enter a color for high priority (black, red, green, yellow, blue, magenta, cyan, white):',
+  );
+
+  input = stdin.readLineSync();
+
+  if (input != null) {
+    TextColor? selectedColor = textColorFromString(input);
+
+    if (selectedColor != null) {
+      print('You selected: ${selectedColor.name}');
+      HighColor = selectedColor;
+    } else {
+      print('Invalid color!');
+    }
+  } else {
+    print('No input received.');
+  }
+
+  print(
+    'Enter a color for normal priority (black, red, green, yellow, blue, magenta, cyan, white):',
+  );
+
+  input = stdin.readLineSync();
+
+  if (input != null) {
+    TextColor? selectedColor = textColorFromString(input);
+
+    if (selectedColor != null) {
+      print('You selected: ${selectedColor.name}');
+      NormalColor = selectedColor;
+    } else {
+      print('Invalid color!');
+    }
+  } else {
+    print('No input received.');
+  }
 }
 
 enum TextColor {
