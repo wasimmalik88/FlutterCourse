@@ -4,6 +4,8 @@ void main() {
   runApp(MyApp());
 }
 
+int count = 0;
+
 // Profile Screen5
 class StatusScreen extends StatelessWidget {
   @override
@@ -14,7 +16,7 @@ class StatusScreen extends StatelessWidget {
         children: [
           ListTile(
             leading: Text(
-              "Status",
+              "Status $count",
               style: TextStyle(
                 fontSize: 20, // 👈 change this value
                 fontWeight: FontWeight.bold, // optional
@@ -135,141 +137,101 @@ class MessageScreen extends StatelessWidget {
   }
 }
 
-class CallScreen extends StatelessWidget {
+class CallScreen extends StatefulWidget {
+  @override
+  State<CallScreen> createState() => _CallScreenState();
+}
+
+class _CallScreenState extends State<CallScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            count++;
+          });
+        },
+        child: Icon(Icons.add), // You can use any icon here
+        tooltip: 'Add Item', // Tooltip that shows on long press
+      ),
       appBar: AppBar(title: Text("Whatsup"), backgroundColor: Colors.blue),
       body: ListView(
         children: [
           ListTile(
-            leading: Text(
-              "Calls",
-              style: TextStyle(
-                fontSize: 20, // 👈 change this value
-                fontWeight: FontWeight.bold, // optional
+            title: Center(
+              child: Text(
+                "Count  $count",
+                style: TextStyle(
+                  fontSize: 20, // 👈 change this value
+                  fontWeight: FontWeight.bold, // optional
+                ),
+              ),
+            ),
+          ),
+
+          SizedBox(height: 100),
+          ListTile(
+            title: Center(
+              child: Container(
+                width: 200,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  image: DecorationImage(
+                    image: AssetImage("assets/Images/aeroplane.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           ),
           ListTile(
             //tileColor: Colors.grey,
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://media.licdn.com/dms/image/v2/D4D03AQGoqIKmBr1LOQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1714210789704?e=2147483647&v=beta&t=IAAYz9kBgp9JJm0yliV8kdtSDWDUoys_IA41KeY3Jh8",
+            title: Container(
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        count++;
+                      });
+                    },
+                    child: Text("Increase"),
+                  ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        count--;
+                      });
+                    },
+                    child: Text("Desc"),
+                  ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        count = 0;
+                      });
+                    },
+                    child: Text("Reset"),
+                  ),
+                ],
               ),
             ),
-            title: Text(
-              "Abdullah",
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            //tileColor: Colors.teal,
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
-              ),
-            ),
-            title: Text("Sana"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            leading: CircleAvatar(backgroundColor: Colors.green),
-            title: Text("Sara"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          ListTile(
-            //tileColor: Colors.grey,
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://media.licdn.com/dms/image/v2/D4D03AQGoqIKmBr1LOQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1714210789704?e=2147483647&v=beta&t=IAAYz9kBgp9JJm0yliV8kdtSDWDUoys_IA41KeY3Jh8",
-              ),
-            ),
-            title: Text(
-              "Abdullah",
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            //tileColor: Colors.teal,
-            leading: CircleAvatar(backgroundColor: Colors.red),
-            title: Text("Ali"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            leading: CircleAvatar(backgroundColor: Colors.green),
-            title: Text("Sara"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          ListTile(
-            //tileColor: Colors.grey,
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://media.licdn.com/dms/image/v2/D4D03AQGoqIKmBr1LOQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1714210789704?e=2147483647&v=beta&t=IAAYz9kBgp9JJm0yliV8kdtSDWDUoys_IA41KeY3Jh8",
-              ),
-            ),
-            title: Text(
-              "Abdullah",
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            //tileColor: Colors.teal,
-            leading: CircleAvatar(backgroundColor: Colors.red),
-            title: Text("Ali"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            leading: CircleAvatar(backgroundColor: Colors.green),
-            title: Text("Sara"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          ListTile(
-            //tileColor: Colors.grey,
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://media.licdn.com/dms/image/v2/D4D03AQGoqIKmBr1LOQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1714210789704?e=2147483647&v=beta&t=IAAYz9kBgp9JJm0yliV8kdtSDWDUoys_IA41KeY3Jh8",
-              ),
-            ),
-            title: Text(
-              "Abdullah",
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            //tileColor: Colors.teal,
-            leading: CircleAvatar(backgroundColor: Colors.red),
-            title: Text("Ali"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
-          ),
-          SizedBox(height: 20),
-          ListTile(
-            leading: CircleAvatar(backgroundColor: Colors.green),
-            title: Text("Sara"),
-            subtitle: Text("September 13, 4:03PM"),
-            trailing: Icon(Icons.call),
           ),
         ],
       ),
