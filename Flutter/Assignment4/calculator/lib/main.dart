@@ -7,27 +7,26 @@ void main() {
 
 String calc = "";
 
-class CallScreen extends StatefulWidget {
+class CalculatorScreen extends StatefulWidget {
   @override
-  State<CallScreen> createState() => _CallScreenState();
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
 }
 
-class _CallScreenState extends State<CallScreen> {
+class _CalculatorScreenState extends State<CalculatorScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: Text("Calculator"),
         backgroundColor: Colors.deepOrange,
@@ -43,17 +42,76 @@ class _CallScreenState extends State<CallScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                // 👈 ensures it takes full width
-                child: Text(
-                  calc,
-                  textAlign: TextAlign.right, // 👈 right-align inside row
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis, // prevent overflow
-                  maxLines: 1,
+                child: Container(
+                  padding: EdgeInsets.all(8), // space between text & border
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black, // border color
+                      width: 2, // border thickness
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      8,
+                    ), // optional rounded corners
+                  ),
+                  child: Text(
+                    calc,
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontFamily:
+                          "Digital", // 👈 use your custom calculator font
+                      fontSize: 64, // bigger for calculator look
+                      fontWeight: FontWeight.normal,
+                      color: Colors
+                          .greenAccent, // typical calculator display color
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ],
           ),
+          SizedBox(height: 100),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () {
+                  setState(() {
+                    Clear();
+                  });
+                },
+                child: Text(
+                  "C",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                onPressed: () {
+                  setState(() {
+                    ProcessBackspace();
+                  });
+                },
+
+                child: Text(
+                  "←",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -63,7 +121,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("7");
                   });
                 },
-                child: Text("7"),
+                child: Text(
+                  "7",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -71,7 +136,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("8");
                   });
                 },
-                child: Text("8"),
+                child: Text(
+                  "8",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -79,7 +151,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("9");
                   });
                 },
-                child: Text("9"),
+                child: Text(
+                  "9",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -91,7 +170,14 @@ class _CallScreenState extends State<CallScreen> {
                   });
                 },
 
-                child: Text("/"),
+                child: Text(
+                  "/",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -106,7 +192,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("4");
                   });
                 },
-                child: Text("4"),
+                child: Text(
+                  "4",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -114,7 +207,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("5");
                   });
                 },
-                child: Text("5"),
+                child: Text(
+                  "5",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -122,7 +222,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("6");
                   });
                 },
-                child: Text("6"),
+                child: Text(
+                  "6",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -134,7 +241,14 @@ class _CallScreenState extends State<CallScreen> {
                   });
                 },
 
-                child: Text("X"),
+                child: Text(
+                  "X",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -148,7 +262,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("1");
                   });
                 },
-                child: Text("1"),
+                child: Text(
+                  "1",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -156,7 +277,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("2");
                   });
                 },
-                child: Text("2"),
+                child: Text(
+                  "2",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -164,7 +292,14 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("3");
                   });
                 },
-                child: Text("3"),
+                child: Text(
+                  "3",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -176,7 +311,14 @@ class _CallScreenState extends State<CallScreen> {
                   });
                 },
 
-                child: Text("-"),
+                child: Text(
+                  "-",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -190,18 +332,31 @@ class _CallScreenState extends State<CallScreen> {
                     ProcessNumber("0");
                   });
                 },
-                child: Text("0"),
+                child: Text(
+                  "0",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
                   setState(() {
-                    Clear();
+                    ProcessNumber(".");
                   });
                 },
-                child: Text("C"),
+                child: Text(
+                  ".",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange[400],
@@ -212,7 +367,14 @@ class _CallScreenState extends State<CallScreen> {
                     processresult();
                   });
                 },
-                child: Text("="),
+                child: Text(
+                  "=",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -224,20 +386,29 @@ class _CallScreenState extends State<CallScreen> {
                   });
                 },
 
-                child: Text("+"),
+                child: Text(
+                  "+",
+                  style: TextStyle(
+                    fontFamily: "Digital",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
         ],
       ),
-
-      drawer: MyDrawer(),
     );
   }
 
   void ProcessNumber(String i) {
     calc = calc + i.toString();
   }
+}
+
+void ProcessBackspace() {
+  calc = calc.substring(0, calc.length - 1);
 }
 
 void Clear() {
@@ -260,45 +431,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CallScreen(),
-      routes: {'/call': (context) => CallScreen()},
-    );
-  }
-}
-
-class MyDrawer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: Colors.grey[200],
-      child: Column(
-        children: [
-          ListTile(
-            leading: Icon(Icons.message),
-            title: Text("Message"),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/message');
-            },
-            //trailing: Text("data"),
-          ),
-          ListTile(
-            leading: Icon(Icons.star),
-            title: Text("Status"),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/status');
-            },
-            //trailing: Text("data"),
-          ),
-          ListTile(
-            leading: Icon(Icons.message),
-            title: Text("Call"),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/call');
-            },
-            //trailing: Text("data"),
-          ),
-        ],
-      ),
+      debugShowCheckedModeBanner: false,
+      home: CalculatorScreen(),
+      routes: {'/call': (context) => CalculatorScreen()},
     );
   }
 }

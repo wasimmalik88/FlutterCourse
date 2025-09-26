@@ -8,7 +8,7 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Image(image: AssetImage("/stylish.jpg"))),
+      appBar: AppBar(title: Image(image: AssetImage("assets/stylish.jpg"))),
       body: ListView(
         children: [
           SizedBox(height: 20),
@@ -22,7 +22,7 @@ class ShopScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: AssetImage("1.jpg"),
+                      backgroundImage: AssetImage("assets/1.jpg"),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -36,7 +36,7 @@ class ShopScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: AssetImage("2.jpg"),
+                      backgroundImage: AssetImage("assets/2.jpg"),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -50,7 +50,7 @@ class ShopScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: AssetImage("3.jpg"),
+                      backgroundImage: AssetImage("assets/3.jpg"),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -64,7 +64,7 @@ class ShopScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundImage: AssetImage("4.jpg"),
+                      backgroundImage: AssetImage("assets/4.jpg"),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -192,7 +192,7 @@ class ShopScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage("/sepcial.PNG")),
+                        Image(image: AssetImage("assets/sepcial.PNG")),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -240,7 +240,7 @@ class ShopScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage("/shoes.PNG")),
+                        Image(image: AssetImage("assets/shoes.PNG")),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -351,7 +351,7 @@ class ShopScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image(
-                              image: AssetImage("/summer.PNG"),
+                              image: AssetImage("assets/summer.PNG"),
                               width: 350,
                               height: 200,
                             ),
