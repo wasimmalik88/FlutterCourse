@@ -84,7 +84,7 @@ class ShopScreen extends StatelessWidget {
 
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: const Color.fromARGB(255, 240, 47, 111),
+                  color: const Color.fromRGBO(253, 110, 134, 1),
                 ),
                 child: Center(
                   child: Column(
@@ -132,7 +132,7 @@ class ShopScreen extends StatelessWidget {
 
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: const Color.fromARGB(255, 86, 115, 247),
+                  color: const Color.fromRGBO(67, 146, 249, 1),
                 ),
                 child: Center(
                   child: Padding(
@@ -231,7 +231,7 @@ class ShopScreen extends StatelessWidget {
 
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: const Color.fromARGB(255, 229, 230, 236),
+                  color: const Color.fromRGBO(231, 231, 235, 0.3),
                 ),
                 child: Center(
                   child: Padding(
@@ -285,7 +285,7 @@ class ShopScreen extends StatelessWidget {
 
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: const Color.fromARGB(255, 240, 47, 111),
+                  color: const Color.fromRGBO(253, 110, 135, 1),
                 ),
                 child: Center(
                   child: Padding(
@@ -334,52 +334,66 @@ class ShopScreen extends StatelessWidget {
               child: Container(
                 width: 400,
                 height: 300,
-
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: const Color.fromARGB(255, 250, 248, 249),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  color: const Color.fromARGB(255, 255, 255, 249),
                 ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image(
-                              image: AssetImage("assets/summer.PNG"),
-                              width: 350,
-                              height: 200,
-                            ),
-                            Text(
-                              "Trending Products",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Last Date 29/02/22",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 10,
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text("View All ->"),
-                            ),
-                          ],
-                        ),
-                      ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Image with top rounded corners
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      child: Image.asset(
+                        "assets/summer.PNG",
+                        width: 400,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
+
+                    const SizedBox(height: 8),
+
+                    // Row for text + button
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceBetween, // 👈 pushes button to right
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Trending Products",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                "Last Date 29/02/22",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("View All ->"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
