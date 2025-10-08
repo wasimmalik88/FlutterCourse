@@ -8,7 +8,9 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Image(image: AssetImage("assets/stylish.jpg"))),
+      appBar: AppBar(
+        title: Image(image: AssetImage("assets/stylish - Copy.jpg")),
+      ),
       body: ListView(
         children: [
           SizedBox(height: 20),
@@ -192,7 +194,7 @@ class ShopScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage("assets/sepcial.PNG")),
+                        Image(image: AssetImage("assets/sepcial.png")),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -207,10 +209,10 @@ class ShopScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 8),
                             Text(
-                              "We make sure you get the offer you need at best prices",
+                              "We make sure you get the offer at best prices",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 10,
+                                fontSize: 8,
                               ),
                             ),
                           ],
@@ -240,7 +242,7 @@ class ShopScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage("assets/shoes.PNG")),
+                        Image(image: AssetImage("assets/shoes.png")),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -348,7 +350,7 @@ class ShopScreen extends StatelessWidget {
                         topRight: Radius.circular(20),
                       ),
                       child: Image.asset(
-                        "assets/summer.PNG",
+                        "assets/summer.png",
                         width: 400,
                         height: 200,
                         fit: BoxFit.cover,
