@@ -14,7 +14,6 @@ class WishlistScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 🔹 Header Row
               Row(
                 children: [
                   ElevatedButton(
@@ -43,7 +42,6 @@ class WishlistScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // 🔹 Scrollable list of property cards
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -56,9 +54,7 @@ class WishlistScreen extends StatelessWidget {
                         baths: 4,
                         garage: 1,
 
-                        onTap: () {
-                          // TODO: open detail page
-                        },
+                        onTap: () {},
                       ),
                       const SizedBox(height: 20),
                       PropertyCard(

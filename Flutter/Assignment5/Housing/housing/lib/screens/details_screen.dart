@@ -36,10 +36,9 @@ class DetailScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                    }, // 👈 add your action here
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Colors.blue.shade50, // same background color
+                      backgroundColor: Colors.blue.shade50,
                       foregroundColor: const Color.fromRGBO(
                         16,
                         49,
@@ -50,7 +49,7 @@ class DetailScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(8),
-                      elevation: 0, // flat look like Container
+                      elevation: 0,
                     ),
                     child: const Icon(Icons.arrow_back_ios, size: 18),
                   ),
@@ -58,7 +57,6 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Big Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
@@ -70,7 +68,6 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Property Title & Bookmark
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -98,10 +95,9 @@ class DetailScreen extends StatelessWidget {
                           builder: (context) => WishlistScreen(),
                         ),
                       );
-                    }, // 👈 add your action here
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Colors.blue.shade50, // same as container color
+                      backgroundColor: Colors.blue.shade50,
                       foregroundColor: const Color.fromRGBO(
                         16,
                         49,
@@ -112,8 +108,7 @@ class DetailScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(8),
-                      elevation:
-                          0, // remove shadow to match flat container look
+                      elevation: 0,
                     ),
                     child: const Icon(Icons.bookmark_border),
                   ),
@@ -121,7 +116,6 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              // Info Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
@@ -132,7 +126,6 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Owner Section
               Row(
                 children: [
                   const CircleAvatar(
@@ -167,7 +160,6 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Description
               const Text(
                 "Completely redone in 2021. 4 bedrooms. 2 bathrooms. "
                 "1 garage, amazing curb appeal and enterain areawater views. "
@@ -176,7 +168,6 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Gallery
               const Text(
                 "Gallery",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -190,13 +181,11 @@ class DetailScreen extends StatelessWidget {
                     galleryImage("assets/1.jpg"),
                     galleryImage("assets/2.jpg"),
                     galleryImage("assets/3.jpg"),
-                    //galleryImage("assets/4.jpg"),
                   ],
                 ),
               ),
               const SizedBox(height: 20),
 
-              // Price & Button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

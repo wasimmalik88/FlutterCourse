@@ -110,7 +110,6 @@ class _ListSelectionPageState extends State<ListSelectionPage> {
     );
   }
 
-  // 🗑 Confirm before deleting a list
   void _confirmDeleteList(int index) {
     showDialog(
       context: context,
@@ -153,7 +152,7 @@ class _ListSelectionPageState extends State<ListSelectionPage> {
       setState(() {
         list['tasks'] = updatedList;
       });
-      await _saveLists(); // <-- ✅ Persist changes after returning
+      await _saveLists();
     }
   }
 
@@ -200,7 +199,7 @@ class _ListSelectionPageState extends State<ListSelectionPage> {
 class ChecklistPage extends StatefulWidget {
   final String title;
   final List<Map<String, dynamic>> initialTasks;
-  final ValueChanged<List<Map<String, dynamic>>>? onChanged; // <-- new
+  final ValueChanged<List<Map<String, dynamic>>>? onChanged;
 
   const ChecklistPage({
     super.key,
@@ -272,7 +271,7 @@ class _ChecklistPageState extends State<ChecklistPage> {
               setState(() {
                 tasks.removeAt(index);
               });
-              widget.onChanged?.call(tasks); // 🔥 save immediately
+              widget.onChanged?.call(tasks);
               Navigator.pop(context);
             },
             child: const Text("Delete", style: TextStyle(color: Colors.red)),
@@ -365,7 +364,7 @@ class _ChecklistPageState extends State<ChecklistPage> {
             setState(() {
               task['completed'] = value!;
             });
-            widget.onChanged?.call(tasks); // 🔥 save immediately
+            widget.onChanged?.call(tasks);
           },
           secondary: IconButton(
             icon: const Icon(Icons.delete, color: Colors.red),

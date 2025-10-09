@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              // Logo
+
               Container(
                 height: 90,
                 width: 90,
@@ -41,7 +41,6 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
 
-              // Email field
               TextField(
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.email_outlined),
@@ -60,7 +59,6 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Password field
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -80,7 +78,6 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              // Remember me and forgot password
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -114,7 +111,6 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              // Sign In button
               SizedBox(
                 width: double.infinity,
                 height: 56,
@@ -149,7 +145,6 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Social buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -161,7 +156,6 @@ class LoginScreen extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // Signup text
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

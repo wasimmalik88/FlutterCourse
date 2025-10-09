@@ -31,7 +31,6 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 🔹 Header Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -76,7 +75,6 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              // 🔹 Title
               const Text(
                 "Discover Best\nSuitable Property",
                 style: TextStyle(
@@ -88,7 +86,6 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // 🔹 Category Buttons
               Row(
                 children: [
                   _categoryButton("House", true),
@@ -100,7 +97,6 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // 🔹 Best for you section
               const Text(
                 "Best for you",
                 style: TextStyle(
@@ -119,7 +115,6 @@ class HomeScreen extends StatelessWidget {
                 baths: 4,
                 garage: 1,
                 onTap: () {
-                  // 👇 Navigate or show details here
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => DetailScreen()),
                   );
@@ -128,7 +123,6 @@ class HomeScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // 🔹 Nearby Section
               const Text(
                 "Nearby your location",
                 style: TextStyle(
@@ -154,7 +148,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // 🔸 Category Button
   Widget _categoryButton(String text, bool selected) {
     return ElevatedButton(
       onPressed: () {},
@@ -180,10 +173,10 @@ class HomeScreen extends StatelessWidget {
     required int beds,
     required int baths,
     required int garage,
-    VoidCallback? onTap, // 👈 optional callback
+    VoidCallback? onTap,
   }) {
     return InkWell(
-      onTap: onTap ?? () {}, // 👈 handle click here
+      onTap: onTap ?? () {},
       borderRadius: BorderRadius.circular(20),
       child: Container(
         decoration: BoxDecoration(
@@ -238,7 +231,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // 🔸 Mini Property Card
   Widget _propertyMiniCard({
     required String image,
     required String title,
@@ -322,7 +314,7 @@ class HomeScreen extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            color: color ?? Colors.white, // 👈 uses custom color if provided
+            color: color ?? Colors.white,
             fontSize: small ? 10 : 12,
           ),
         ),
