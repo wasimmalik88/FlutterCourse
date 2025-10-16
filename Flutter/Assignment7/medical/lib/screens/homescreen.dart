@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
 import 'package:medical/screens/ProductCard.dart';
 import 'package:medical/screens/productdetailsScreen.dart';
@@ -139,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    width: 220,
+                    width: 250,
                     margin: EdgeInsets.only(right: 12, bottom: 6),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -198,14 +199,26 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Icon(
-                                        Icons.add_shopping_cart_outlined,
-                                        size: 18,
-                                      ),
+                                      onPressed: () {
+                                        cartManager.addToCart(p);
+
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              '${p.name} added to cart',
+                                            ),
+                                          ),
+                                        );
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         shape: const CircleBorder(),
                                         padding: const EdgeInsets.all(8),
+                                      ),
+                                      child: const Icon(
+                                        Icons.add_shopping_cart_outlined,
+                                        size: 18,
                                       ),
                                     ),
                                   ],

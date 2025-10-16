@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
+
 import 'package:medical/screens/productdetailsScreen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -14,96 +16,87 @@ class ProductCard extends StatelessWidget {
           builder: (_) => ProductDetailScreen(product: product),
         ),
       ),
-      child: SizedBox(
-        height: 200,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: demoProducts.length,
-          itemBuilder: (context, index) {
-            final p = demoProducts[index];
-            return GestureDetector(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => ProductDetailScreen(product: p),
+      child: Container(
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Product Image
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+                child: Center(
+                  child: Image.network(
+                    product.image,
+                    height: 100, // adjust as needed (e.g., 80–120)
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
-              child: Container(
-                width: 220,
-                margin: EdgeInsets.only(right: 12, bottom: 6),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.03),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
+            ),
+            // Product Details
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 6.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${product.price.toStringAsFixed(2)} Rs',
+                    style: const TextStyle(
+                      color: Colors.teal,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: SizedBox(width: 60, child: Image.network(p.image)),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 12.0,
-                          horizontal: 6.0,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              p.name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              p.desc,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black54,
-                              ),
-                            ),
-                            const Spacer(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${p.price.toStringAsFixed(2)} Rs',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  child: const Icon(
-                                    Icons.add_shopping_cart_outlined,
-                                    size: 18,
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: const CircleBorder(),
-                                    padding: const EdgeInsets.all(8),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                  ),
+                  const SizedBox(height: 6),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        cartManager.addToCart(product);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${product.name} added to cart'),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(8),
+                      ),
+                      child: const Icon(
+                        Icons.add_shopping_cart_outlined,
+                        size: 18,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );

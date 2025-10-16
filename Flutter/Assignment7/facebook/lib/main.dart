@@ -1,13 +1,3 @@
-// Facebook Clone - Single-file Flutter starter
-// Features implemented:
-// - Top AppBar (logo, search, messenger)
-// - Create Post card with modal
-// - Stories horizontal list
-// - Feed with post cards (image/text, likes, comments, share)
-// - BottomNavigationBar (Home, Friends, Watch, Notifications, Menu)
-// - Simple models and dummy data
-// - Responsive-friendly layout and light theme
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -128,6 +118,59 @@ class Post {
   });
 }
 
+class Comment {
+  final String id;
+  final User user;
+  final String text;
+  final DateTime createdAt;
+
+  Comment({
+    required this.id,
+    required this.user,
+    required this.text,
+    required this.createdAt,
+  });
+}
+
+final Map<String, List<Comment>> postComments = {
+  'p1': [
+    Comment(
+      id: 'c1',
+      user: users[1],
+      text: 'Those pancakes look amazing! 🥞',
+      createdAt: DateTime.now().subtract(const Duration(minutes: 30)),
+    ),
+    Comment(
+      id: 'c2',
+      user: users[2],
+      text: 'I’ve been wanting to try that cafe too!',
+      createdAt: DateTime.now().subtract(const Duration(minutes: 10)),
+    ),
+  ],
+  'p2': [
+    Comment(
+      id: 'c3',
+      user: users[0],
+      text: 'Looks so relaxing 🌴',
+      createdAt: DateTime.now().subtract(const Duration(minutes: 11)),
+    ),
+  ],
+  'p3': [
+    Comment(
+      id: 'c4',
+      user: users[3],
+      text: 'Try “Atomic Habits” — it’s a game changer.',
+      createdAt: DateTime.now().subtract(const Duration(minutes: 20)),
+    ),
+    Comment(
+      id: 'c5',
+      user: users[1],
+      text: 'I second that! Really practical book.',
+      createdAt: DateTime.now().subtract(const Duration(seconds: 15)),
+    ),
+  ],
+};
+
 final currentUser = User(
   id: 'u0',
   name: 'You',
@@ -135,10 +178,10 @@ final currentUser = User(
 );
 
 final users = [
-  User(id: 'u1', name: 'Alice', avatar: 'https://i.pravatar.cc/150?img=10'),
-  User(id: 'u2', name: 'Bob', avatar: 'https://i.pravatar.cc/150?img=12'),
-  User(id: 'u3', name: 'Carmen', avatar: 'https://i.pravatar.cc/150?img=18'),
-  User(id: 'u4', name: 'Diego', avatar: 'https://i.pravatar.cc/150?img=22'),
+  User(id: 'u1', name: 'Aina', avatar: 'https://i.pravatar.cc/150?img=10'),
+  User(id: 'u2', name: 'Imran', avatar: 'https://i.pravatar.cc/150?img=12'),
+  User(id: 'u3', name: 'Ali', avatar: 'https://i.pravatar.cc/150?img=18'),
+  User(id: 'u4', name: 'Rifat', avatar: 'https://i.pravatar.cc/150?img=22'),
 ];
 
 final List<Post> demoPosts = [
@@ -247,12 +290,148 @@ class _HomePageState extends State<HomePage> {
                 onLike: () {
                   setState(() => post.likes += 1);
                 },
+                onComment: () => _showCommentsModal(context, post), // 👈 new
               ),
             );
           }, childCount: demoPosts.length),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 80)),
       ],
+    );
+  }
+
+  void _showCommentsModal(BuildContext context, Post post) {
+    final TextEditingController commentController = TextEditingController();
+    postComments.putIfAbsent(post.id, () => []);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) {
+        final comments = postComments[post.id]!;
+
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: StatefulBuilder(
+            builder: (context, setModalState) {
+              return Container(
+                padding: const EdgeInsets.all(16),
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Comments',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                    const Divider(),
+
+                    // Comments list
+                    Expanded(
+                      child: comments.isEmpty
+                          ? const Center(
+                              child: Text(
+                                'No comments yet. Be the first to comment!',
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                            )
+                          : ListView.builder(
+                              itemCount: comments.length,
+                              itemBuilder: (context, index) {
+                                final c = comments[index];
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      c.user.avatar,
+                                    ),
+                                  ),
+                                  title: Text(
+                                    c.user.name,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  subtitle: Text(c.text),
+                                  trailing: Text(
+                                    '${DateTime.now().difference(c.createdAt).inMinutes}m ago',
+                                    style: const TextStyle(
+                                      fontSize: 11,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                    ),
+
+                    const Divider(height: 1),
+
+                    // Comment input
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(currentUser.avatar),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: TextField(
+                            controller: commentController,
+                            decoration: const InputDecoration(
+                              hintText: 'Write a comment...',
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.send, color: Colors.blue),
+                          onPressed: () {
+                            final text = commentController.text.trim();
+                            if (text.isEmpty) return;
+
+                            final newComment = Comment(
+                              id: DateTime.now().toIso8601String(),
+                              user: currentUser,
+                              text: text,
+                              createdAt: DateTime.now(),
+                            );
+
+                            setModalState(() {
+                              comments.add(newComment);
+                            });
+                            commentController.clear();
+
+                            setState(() {
+                              post.comments = comments.length;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -454,7 +633,8 @@ class _StoryTile extends StatelessWidget {
 class PostCard extends StatelessWidget {
   final Post post;
   final VoidCallback? onLike;
-  const PostCard({required this.post, this.onLike, super.key});
+  final VoidCallback? onComment; // 👈 add this
+  const PostCard({required this.post, this.onLike, this.onComment, super.key});
 
   String _timeAgo(DateTime dt) {
     final dur = DateTime.now().difference(dt);
@@ -585,7 +765,7 @@ class PostCard extends StatelessWidget {
               ),
               Expanded(
                 child: TextButton.icon(
-                  onPressed: () {},
+                  onPressed: onComment,
                   icon: const Icon(Icons.mode_comment_outlined),
                   label: const Text('Comment'),
                 ),
@@ -604,5 +784,3 @@ class PostCard extends StatelessWidget {
     );
   }
 }
-
-// End of file

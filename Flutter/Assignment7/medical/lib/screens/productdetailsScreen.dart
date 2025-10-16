@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -62,7 +63,13 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    cartManager.addToCart(product);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${product.name} added to cart')),
+                    );
+                  },
                   icon: const Icon(Icons.shopping_cart_outlined),
                   label: const Text('Add to cart'),
                   style: ElevatedButton.styleFrom(

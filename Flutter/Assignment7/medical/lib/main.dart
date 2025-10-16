@@ -16,6 +16,7 @@ class MedicalStoreApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Medical Store',
+
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         scaffoldBackgroundColor: const Color(0xFFF7F9FB),

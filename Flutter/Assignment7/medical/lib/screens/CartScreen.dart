@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:medical/screens/Product.dart';
 
+class CartManager {
+  static final CartManager _instance = CartManager._internal();
+  factory CartManager() => _instance;
+  CartManager._internal();
+
+  void addToCart(dynamic product) {
+    final index = cart.indexWhere((item) => item['product'].id == product.id);
+
+    if (index != -1) {
+      cart[index]['qty'] = cart[index]['qty'] + 1;
+    } else {
+      cart.add({'product': product, 'qty': 1});
+    }
+  }
+
+  void removeFromCart(dynamic product) {
+    cart.removeWhere((item) => item['product'] == product);
+  }
+
+  late List<Map<String, dynamic>> cart = [];
+}
+
+final cartManager = CartManager();
+
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
@@ -10,35 +34,35 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   // Initialize cart items with quantity
-  late List<Map<String, dynamic>> cart;
+  //late List<Map<String, dynamic>> cart;
 
   @override
   void initState() {
     super.initState();
-    cart = demoProducts.take(2).map((p) {
-      return {'product': p, 'qty': 1};
-    }).toList();
+    // cartManager.cart = demoProducts.take(2).map((p) {
+    //   return {'product': p, 'qty': 1};
+    // }).toList();
   }
 
   void _increaseQty(int index) {
     setState(() {
-      cart[index]['qty']++;
+      cartManager.cart[index]['qty']++;
     });
   }
 
   void _decreaseQty(int index) {
     setState(() {
-      if (cart[index]['qty'] > 1) {
-        cart[index]['qty']--;
+      if (cartManager.cart[index]['qty'] > 1) {
+        cartManager.cart[index]['qty']--;
       } else {
         // remove item if qty reaches 0
-        cart.removeAt(index);
+        cartManager.cart.removeAt(index);
       }
     });
   }
 
   double get total {
-    return cart.fold(0, (sum, item) {
+    return cartManager.cart.fold(0, (sum, item) {
       final p = item['product'] as Product;
       final qty = item['qty'] as int;
       return sum + p.price * qty;
@@ -58,14 +82,14 @@ class _CartScreenState extends State<CartScreen> {
           ),
           const SizedBox(height: 12),
           Expanded(
-            child: cart.isEmpty
+            child: cartManager.cart.isEmpty
                 ? const Center(child: Text('Your cart is empty'))
                 : ListView.separated(
-                    itemCount: cart.length,
+                    itemCount: cartManager.cart.length,
                     separatorBuilder: (_, __) => const SizedBox(height: 8),
                     itemBuilder: (context, index) {
-                      final p = cart[index]['product'] as Product;
-                      final qty = cart[index]['qty'] as int;
+                      final p = cartManager.cart[index]['product'] as Product;
+                      final qty = cartManager.cart[index]['qty'] as int;
 
                       return Container(
                         padding: const EdgeInsets.all(12),
