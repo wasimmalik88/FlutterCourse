@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "287921023141",
+    "project_id": "jawanpakistan-85392",
+    "storage_bucket": "jawanpakistan-85392.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287921023141:android:2273411f717eab0a11454c",
+        "android_client_info": {
+          "package_name": "com.example.firebaseproj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc1pofIe_oXWw1Ig-2TgM5cOq3gyUgxbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
