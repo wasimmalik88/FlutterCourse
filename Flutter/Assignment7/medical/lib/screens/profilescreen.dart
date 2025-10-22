@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+
+  Future<void> _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+
+    // Optionally show a small message
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("Signed out successfully")));
+
+    // The AuthWrapper in main.dart will automatically take user to MessagePage
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +68,15 @@ class ProfileScreen extends StatelessWidget {
                   trailing: const Icon(Icons.chevron_right),
                 ),
                 const SizedBox(height: 24),
+
+                // ✅ Sign Out Button
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _signOut(context),
                   icon: const Icon(Icons.logout),
                   label: const Text('Sign out'),
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    foregroundColor: Colors.white,
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),

@@ -1,10 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medical/firebase_options.dart';
 import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/CategoriesScreen.dart';
 import 'package:medical/screens/homescreen.dart';
+import 'package:medical/screens/login.dart';
 import 'package:medical/screens/profilescreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MedicalStoreApp());
 }
 
@@ -16,7 +23,6 @@ class MedicalStoreApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Medical Store',
-
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         scaffoldBackgroundColor: const Color(0xFFF7F9FB),
@@ -27,7 +33,32 @@ class MedicalStoreApp extends StatelessWidget {
           titleMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
         ),
       ),
-      home: const MainShell(),
+      home: const AuthWrapper(),
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        // ⏳ Waiting for Firebase connection
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (snapshot.hasData) {
+          return const MainShell();
+        }
+
+        return const MessagePage();
+      },
     );
   }
 }
@@ -55,9 +86,23 @@ class _MainShellState extends State<MainShell> {
     });
   }
 
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Medical Store"),
+        actions: [
+          IconButton(
+            onPressed: _logout,
+            icon: const Icon(Icons.logout),
+            tooltip: "Logout",
+          ),
+        ],
+      ),
       body: SafeArea(child: _pages[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

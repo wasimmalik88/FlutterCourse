@@ -95,7 +95,7 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Simple Flutter Appp')),
+      appBar: AppBar(title: const Text('Simple Flutter Login App')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -115,6 +115,7 @@ class _MessagePageState extends State<MessagePage> {
                 labelText: "Enter Password",
                 border: OutlineInputBorder(),
               ),
+              obscureText: true,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
