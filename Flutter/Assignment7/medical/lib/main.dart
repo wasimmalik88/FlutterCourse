@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:medical/firebase_options.dart';
 import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/CategoriesScreen.dart';
+import 'package:medical/screens/addproductscreen.dart';
+import 'package:medical/screens/displayproductscreen.dart';
 import 'package:medical/screens/homescreen.dart';
 import 'package:medical/screens/login.dart';
 import 'package:medical/screens/profilescreen.dart';
@@ -77,7 +79,8 @@ class _MainShellState extends State<MainShell> {
     HomeScreen(),
     CategoriesScreen(),
     CartScreen(),
-    ProfileScreen(),
+    AddDataPage(),
+    UsersListPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -124,6 +127,11 @@ class _MainShellState extends State<MainShell> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             label: 'Profile',
+          ),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Users',
           ),
         ],
       ),
