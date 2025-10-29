@@ -16,16 +16,13 @@ class HomeScreen extends StatelessWidget {
         .orderBy('createdAt', descending: true)
         .snapshots()
         .map((snapshot) {
-          // Optional: debug print
-          // print('docs: ${snapshot.docs.length}');
           return snapshot.docs.map((doc) {
             final raw = doc.data();
-            // Defensive cast — doc.data() is Object? so cast to Map explicitly
+
             final data = (raw is Map<String, dynamic>)
                 ? raw
                 : Map<String, dynamic>.from(raw as Map);
 
-            // parse price defensively
             double parsePrice(dynamic p) {
               if (p == null) return 0.0;
               if (p is double) return p;
@@ -185,7 +182,6 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
 
-                // Popular section
                 const Text(
                   'Popular',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -200,7 +196,6 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final p = products[index];
 
-                      // decode image if base64, else leave as URL
                       Uint8List? imageBytes;
                       if (p.image.isNotEmpty && !p.image.startsWith('http')) {
                         try {
@@ -300,8 +295,6 @@ class HomeScreen extends StatelessWidget {
                                           ),
                                           ElevatedButton(
                                             onPressed: () {
-                                              // Make sure cartManager is defined in your app scope.
-                                              // If not, replace with your cart logic.
                                               cartManager.addToCart(p);
                                               ScaffoldMessenger.of(
                                                 context,

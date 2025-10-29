@@ -13,7 +13,6 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Uint8List? imageBytes;
 
-    // Detect if image is base64
     if (product.image.isNotEmpty && !product.image.startsWith('http')) {
       try {
         imageBytes = base64Decode(product.image);
@@ -44,7 +43,6 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image (handles base64 + URL)
             Expanded(
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(
@@ -78,7 +76,6 @@ class ProductCard extends StatelessWidget {
               ),
             ),
 
-            // Product Details
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 8.0,

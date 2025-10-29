@@ -31,7 +31,6 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image
             Center(
               child: Container(
                 height: 200,
@@ -55,7 +54,6 @@ class ProductDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Product Name
             Text(
               product.name,
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -63,7 +61,6 @@ class ProductDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            // Product Description
             Text(
               product.desc.isNotEmpty
                   ? product.desc
@@ -85,7 +82,6 @@ class ProductDetailScreen extends StatelessWidget {
 
             const Spacer(),
 
-            // Price + Add to Cart
             Row(
               children: [
                 Text(
