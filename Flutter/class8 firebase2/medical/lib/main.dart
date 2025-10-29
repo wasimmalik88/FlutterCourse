@@ -2,9 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical/firebase_options.dart';
+import 'package:medical/screens/CartScreen.dart';
+import 'package:medical/screens/CategoriesScreen.dart';
 import 'package:medical/screens/addproductscreen.dart';
 import 'package:medical/screens/displayproductscreen.dart';
+
+import 'package:medical/screens/homescreen.dart';
 import 'package:medical/screens/login.dart';
+import 'package:medical/screens/profilescreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +36,7 @@ class MedicalStoreApp extends StatelessWidget {
           titleMedium: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
         ),
       ),
-      home: const MainShell(),
+      home: const AuthWrapper(),
     );
   }
 }
@@ -71,7 +76,12 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[AddDataPage(), UsersListPage()];
+  static const List<Widget> _pages = <Widget>[
+    HomeScreen(),
+    ProductsListPage(),
+    CartScreen(),
+    ProfileScreen(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -104,11 +114,19 @@ class _MainShellState extends State<MainShell> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
-            label: 'Add User',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grid_view_outlined),
-            label: 'Users List',
+            label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Profile',
           ),
         ],
       ),

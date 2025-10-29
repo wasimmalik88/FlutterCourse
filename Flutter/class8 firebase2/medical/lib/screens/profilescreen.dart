@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:medical/screens/addproductscreen.dart';
+import 'package:medical/screens/displayproductscreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -49,13 +51,29 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ListTile(
                   leading: const Icon(Icons.history),
-                  title: const Text('Orders'),
+                  title: const Text('Add products'),
                   trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddDataPage(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.location_on_outlined),
-                  title: const Text('Addresses'),
+                  leading: const Icon(Icons.history),
+                  title: const Text('View All products'),
                   trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProductsListPage(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   leading: const Icon(Icons.payment_outlined),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
@@ -8,6 +10,15 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Uint8List? imageBytes;
+    try {
+      if (product.image.isNotEmpty) {
+        imageBytes = base64Decode(product.image);
+      }
+    } catch (e) {
+      return const Icon(Icons.broken_image, size: 48);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -20,28 +31,48 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Product Image
             Center(
-              child: SizedBox(height: 160, child: Image.network(product.image)),
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[100],
+                ),
+                child: imageBytes != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.memory(imageBytes, fit: BoxFit.contain),
+                      )
+                    : const Icon(
+                        Icons.image_not_supported,
+                        size: 80,
+                        color: Colors.grey,
+                      ),
+              ),
             ),
-            const SizedBox(height: 12),
+
+            const SizedBox(height: 20),
+
+            // Product Name
             Text(
               product.name,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Icon(Icons.star, color: Colors.amber),
-                SizedBox(width: 6),
-                Text(product.rating.toString()),
-              ],
-            ),
-            const SizedBox(height: 12),
+
+            const SizedBox(height: 10),
+
+            // Product Description
             Text(
-              product.desc,
+              product.desc.isNotEmpty
+                  ? product.desc
+                  : 'No description available.',
               style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
-            const SizedBox(height: 12),
+
+            const SizedBox(height: 20),
+
             const Text(
               'Details',
               style: TextStyle(fontWeight: FontWeight.w700),
@@ -51,7 +82,10 @@ class ProductDetailScreen extends StatelessWidget {
               '• 20 tablets per pack\n• Store in a cool dry place\n• Consult physician if symptoms persist',
               style: TextStyle(color: Colors.black54),
             ),
+
             const Spacer(),
+
+            // Price + Add to Cart
             Row(
               children: [
                 Text(

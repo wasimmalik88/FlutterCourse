@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:medical/screens/Product.dart';
 
@@ -33,17 +35,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  // Initialize cart items with quantity
-  //late List<Map<String, dynamic>> cart;
-
-  @override
-  void initState() {
-    super.initState();
-    // cartManager.cart = demoProducts.take(2).map((p) {
-    //   return {'product': p, 'qty': 1};
-    // }).toList();
-  }
-
   void _increaseQty(int index) {
     setState(() {
       cartManager.cart[index]['qty']++;
@@ -55,7 +46,6 @@ class _CartScreenState extends State<CartScreen> {
       if (cartManager.cart[index]['qty'] > 1) {
         cartManager.cart[index]['qty']--;
       } else {
-        // remove item if qty reaches 0
         cartManager.cart.removeAt(index);
       }
     });
@@ -91,6 +81,15 @@ class _CartScreenState extends State<CartScreen> {
                       final p = cartManager.cart[index]['product'] as Product;
                       final qty = cartManager.cart[index]['qty'] as int;
 
+                      Uint8List? imageBytes;
+                      try {
+                        if (p.image.isNotEmpty) {
+                          imageBytes = base64Decode(p.image);
+                        }
+                      } catch (e) {
+                        return const Icon(Icons.broken_image, size: 48);
+                      }
+
                       return Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
@@ -106,7 +105,26 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 68, child: Image.network(p.image)),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: imageBytes != null
+                                  ? Image.memory(
+                                      imageBytes,
+                                      height: 68,
+                                      width: 68,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Container(
+                                      height: 68,
+                                      width: 68,
+                                      color: Colors.grey[200],
+                                      child: const Icon(
+                                        Icons.image_not_supported,
+                                        color: Colors.grey,
+                                        size: 40,
+                                      ),
+                                    ),
+                            ),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Column(
@@ -186,13 +204,13 @@ class _CartScreenState extends State<CartScreen> {
           const SizedBox(height: 12),
           ElevatedButton(
             onPressed: () {},
-            child: const Text('Checkout'),
             style: ElevatedButton.styleFrom(
               minimumSize: const Size.fromHeight(50),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+            child: const Text('Checkout'),
           ),
         ],
       ),

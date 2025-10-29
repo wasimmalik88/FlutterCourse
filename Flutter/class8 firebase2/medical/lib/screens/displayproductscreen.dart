@@ -1,36 +1,20 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(const FirebaseReadDataApp());
-}
-
-class FirebaseReadDataApp extends StatelessWidget {
-  const FirebaseReadDataApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Firestore Users List',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const UsersListPage(),
-    );
-  }
-}
-
-class UsersListPage extends StatelessWidget {
-  const UsersListPage({super.key});
+class ProductsListPage extends StatelessWidget {
+  const ProductsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('All Users')),
+      appBar: AppBar(title: const Text('All Products'), centerTitle: true),
       body: StreamBuilder<QuerySnapshot>(
         stream: firestore
-            .collection('users')
+            .collection('products')
             .orderBy('createdAt', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -39,31 +23,87 @@ class UsersListPage extends StatelessWidget {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No users found.'));
+            return const Center(child: Text('No products found.'));
           }
 
-          final users = snapshot.data!.docs;
+          final products = snapshot.data!.docs;
 
-          return SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: DataTable(
-              columnSpacing: 16,
-              columns: const [
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Email')),
-                DataColumn(label: Text('Phone')),
-              ],
-              rows: users.map((doc) {
-                final data = doc.data() as Map<String, dynamic>;
-                return DataRow(
-                  cells: [
-                    DataCell(Text(data['name'] ?? '')),
-                    DataCell(Text(data['email'] ?? '')),
-                    DataCell(Text(data['phone'] ?? '')),
-                  ],
-                );
-              }).toList(),
-            ),
+          return ListView.builder(
+            itemCount: products.length,
+            padding: const EdgeInsets.all(12),
+            itemBuilder: (context, index) {
+              final data = products[index].data() as Map<String, dynamic>;
+
+              final name = data['name'] ?? 'No Name';
+              final desc = data['desc'] ?? '';
+              final price = data['price'] ?? '';
+              final base64Image = data['imageBlob'] ?? '';
+
+              Uint8List? imageBytes;
+              if (base64Image.isNotEmpty) {
+                try {
+                  imageBytes = base64Decode(base64Image);
+                } catch (e) {
+                  return const Icon(Icons.broken_image, size: 48);
+                }
+              }
+
+              return Card(
+                elevation: 3,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(12),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: imageBytes != null
+                        ? Image.memory(
+                            imageBytes,
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.broken_image, size: 60),
+                          )
+                        : Container(
+                            width: 70,
+                            height: 70,
+                            color: Colors.grey[200],
+                            child: const Icon(
+                              Icons.image_not_supported,
+                              size: 40,
+                              color: Colors.grey,
+                            ),
+                          ),
+                  ),
+                  title: Text(
+                    name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      desc,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  trailing: Text(
+                    '${price.toString()} Rs',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ),
+              );
+            },
           );
         },
       ),

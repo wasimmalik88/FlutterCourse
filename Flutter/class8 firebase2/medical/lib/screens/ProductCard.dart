@@ -1,7 +1,8 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
-
 import 'package:medical/screens/productdetailsScreen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -10,6 +11,17 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Uint8List? imageBytes;
+
+    // Detect if image is base64
+    if (product.image.isNotEmpty && !product.image.startsWith('http')) {
+      try {
+        imageBytes = base64Decode(product.image);
+      } catch (e) {
+        imageBytes = null;
+      }
+    }
+
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
@@ -32,21 +44,40 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image
+            // Product Image (handles base64 + URL)
             Expanded(
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(12),
                 ),
                 child: Center(
-                  child: Image.network(
-                    product.image,
-                    height: 100, // adjust as needed (e.g., 80–120)
-                    fit: BoxFit.contain,
-                  ),
+                  child: imageBytes != null
+                      ? Image.memory(
+                          imageBytes,
+                          height: 100,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(
+                                Icons.broken_image,
+                                size: 60,
+                                color: Colors.grey,
+                              ),
+                        )
+                      : Image.network(
+                          product.image,
+                          height: 100,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(
+                                Icons.broken_image,
+                                size: 60,
+                                color: Colors.grey,
+                              ),
+                        ),
                 ),
               ),
             ),
+
             // Product Details
             Padding(
               padding: const EdgeInsets.symmetric(
