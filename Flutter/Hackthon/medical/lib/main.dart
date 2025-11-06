@@ -3,8 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical/firebase_options.dart';
 import 'package:medical/screens/CartScreen.dart';
-import 'package:medical/screens/CategoriesScreen.dart';
-import 'package:medical/screens/addproductscreen.dart';
+
 import 'package:medical/screens/displayproductscreen.dart';
 
 import 'package:medical/screens/homescreen.dart';
@@ -49,7 +48,6 @@ class AuthWrapper extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // ⏳ Waiting for Firebase connection
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
