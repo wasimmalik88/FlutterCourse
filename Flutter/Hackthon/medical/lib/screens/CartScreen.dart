@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:medical/screens/Product.dart';
+import 'package:medical/screens/Components/ProductClass.dart';
 
 class CartManager {
   static final CartManager _instance = CartManager._internal();

@@ -111,14 +111,11 @@ void showAddToCartPopup(BuildContext context, dynamic product) {
 
                 const SizedBox(height: 8),
 
-                Text(
-                  product.name ?? "Product Name",
-                  style: const TextStyle(color: Colors.grey),
-                ),
+                Text(product.name, style: const TextStyle(color: Colors.grey)),
                 const SizedBox(height: 4),
 
                 Text(
-                  "${((product.price ?? 1500) * quantity).toStringAsFixed(0)} Rs",
+                  "${((product.price) * quantity).toStringAsFixed(0)} Rs",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

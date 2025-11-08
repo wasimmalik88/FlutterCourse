@@ -7,7 +7,7 @@ import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/displayproductscreen.dart';
 
 import 'package:medical/screens/homescreen.dart';
-import 'package:medical/screens/login.dart';
+import 'package:medical/screens/loginScreen.dart';
 import 'package:medical/screens/profilescreen.dart';
 
 void main() async {
@@ -119,7 +119,7 @@ class _MainShellState extends State<MainShell> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grid_view_outlined),
-            label: 'Categories',
+            label: 'Products',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),

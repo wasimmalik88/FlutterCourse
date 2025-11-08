@@ -44,16 +44,14 @@ class _AddDataPageState extends State<AddDataPage> {
     try {
       setState(() => _isSaving = true);
 
-      // ✅ Convert image to Base64 string
       final bytes = await _imageFile!.readAsBytes();
       final base64Image = base64Encode(bytes);
 
-      // ✅ Store as base64 (blob) in Firestore
       await _firestore.collection('products').add({
         'name': name,
         'desc': desc,
         'price': price,
-        'imageBlob': base64Image, // <-- image stored as base64
+        'imageBlob': base64Image,
         'createdAt': FieldValue.serverTimestamp(),
       });
 

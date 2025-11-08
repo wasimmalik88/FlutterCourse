@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:medical/screens/CartScreen.dart';
-import 'package:medical/screens/Product.dart';
-import 'package:medical/screens/addtocartscreen.dart';
-import 'package:medical/screens/productdetailsScreen.dart';
+import 'package:medical/screens/Components/ProductClass.dart';
+import 'package:medical/screens/Components/addtocartpopup.dart';
+import 'package:medical/screens/ProductDetailsScreen.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
