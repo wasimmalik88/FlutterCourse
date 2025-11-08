@@ -85,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return const Scaffold(body: Center(child: Text('No products found')));
         }
 
-        // Filter products based on search query
         final products = snapshot.data!
             .where(
               (product) => product.name.toLowerCase().contains(_searchQuery),
@@ -410,6 +409,66 @@ class _HomeScreenState extends State<HomeScreen> {
                         final p = products[index];
                         return ProductCard(product: p);
                       },
+                    ),
+
+                    const Text(
+                      'Latest News',
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    ListView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        ListTile(
+                          trailing: SizedBox(
+                            height: 250.0,
+                            width: 100.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                'https://i.ibb.co/6RccPy7t/1.jpg',
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            "Philosophy That Addresses Topics Such As Goodness",
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                          subtitle: Text(
+                            "Agar tetap kinclong, bodi motor ten...",
+                          ),
+                          //trailing: Text("2 days ago"),
+                        ),
+                        SizedBox(height: 20),
+                        ListTile(
+                          trailing: SizedBox(
+                            height: 250.0,
+                            width: 100.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                'https://i.ibb.co/Hfdvdspq/9fd4632c919b7d44f96fff68b13708a99c93e6df.jpg',
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                          ),
+                          title: Text(
+                            "Many Inquiries Outside Of Academia Are Philosophical In The Broad Sense",
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                          subtitle: Text(
+                            "In one general sense, philosophy is ass...",
+                          ),
+                          //trailing: Text("2 days ago"),
+                        ),
+                      ],
                     ),
                   ] else ...[
                     const SizedBox(height: 18),

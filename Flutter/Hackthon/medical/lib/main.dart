@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:medical/firebase_options.dart';
 import 'package:medical/screens/CartScreen.dart';
 
-import 'package:medical/screens/displayproductscreen.dart';
+import 'package:medical/screens/DisplayProductScreen.dart';
 
-import 'package:medical/screens/homescreen.dart';
-import 'package:medical/screens/loginScreen.dart';
+import 'package:medical/screens/HomeScreen.dart';
+import 'package:medical/screens/LoginScreen.dart';
 import 'package:medical/screens/profilescreen.dart';
 
 void main() async {

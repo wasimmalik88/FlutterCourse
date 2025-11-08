@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:medical/screens/CartScreen.dart';
+
 import 'package:medical/screens/Components/ProductClass.dart';
 
 import 'package:medical/screens/Components/addtocartpopup.dart';
