@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
+import 'package:medical/screens/addtocartscreen.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final Product product;
@@ -29,7 +30,7 @@ class ProductDetailScreen extends StatelessWidget {
           style: TextStyle(color: Colors.black87),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +62,6 @@ class ProductDetailScreen extends StatelessWidget {
               product.name,
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-
             const SizedBox(height: 4),
             Text(
               '${product.price.toStringAsFixed(2)} Rs',
@@ -71,6 +71,7 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+
             Row(
               mainAxisSize: MainAxisSize.min,
               children: const [
@@ -86,6 +87,8 @@ class ProductDetailScreen extends StatelessWidget {
               ],
             ),
 
+            const SizedBox(height: 10),
+
             Text(
               product.desc.isNotEmpty
                   ? product.desc
@@ -94,19 +97,77 @@ class ProductDetailScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 20),
-
-            const Text(
-              'Details',
-              style: TextStyle(fontWeight: FontWeight.w700),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  'Reviews (86)',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.amber, size: 18),
+                    SizedBox(width: 4),
+                    Text(
+                      '4.6',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            const SizedBox(height: 6),
-            const Text(
-              '• 20 tablets per pack\n• Store in a cool dry place\n• Consult physician if symptoms persist',
-              style: TextStyle(color: Colors.black54),
+
+            const SizedBox(height: 10),
+
+            ListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: const [
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      "https://picsum.photos/id/237/200/300",
+                    ),
+                  ),
+                  title: Text(
+                    "Abdullah",
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  subtitle: Text(
+                    "I had the most incredible dining experience at this restaurant! The food was absolutely delicious - every dish was perfectly prepared and beautifully presented.",
+                  ),
+                  trailing: Text("2 days ago"),
+                ),
+                SizedBox(height: 20),
+                ListTile(
+                  //tileColor: Colors.teal,
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+                    ),
+                  ),
+                  title: Text("Sana"),
+                  subtitle: Text(
+                    "My husband and I celebrated our anniversary here and it couldn't have been more perfect.",
+                  ),
+                  trailing: Text("2:35 PM"),
+                  //trailing: Text("2:30 PM"),
+                ),
+                ListTile(
+                  leading: CircleAvatar(backgroundColor: Colors.green),
+                  title: Text("Sara"),
+                  subtitle: Text(
+                    "This place has hands down the best brunch in town! The avocado toast with poached eggs was incredible",
+                  ),
+                  trailing: Text("2:39 PM"),
+                ),
+              ],
             ),
 
-            const Spacer(),
-
+            const SizedBox(height: 20),
             Row(
               children: [
                 Text(
@@ -119,8 +180,8 @@ class ProductDetailScreen extends StatelessWidget {
                 const Spacer(),
                 ElevatedButton.icon(
                   onPressed: () {
-                    cartManager.addToCart(product);
-
+                    showAddToCartPopup(context, product);
+                    //cartManager.addToCart(product);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('${product.name} added to cart')),
                     );

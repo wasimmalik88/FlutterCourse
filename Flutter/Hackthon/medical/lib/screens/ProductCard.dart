@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:medical/screens/CartScreen.dart';
 import 'package:medical/screens/Product.dart';
+import 'package:medical/screens/addtocartscreen.dart';
 import 'package:medical/screens/productdetailsScreen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -118,8 +119,8 @@ class ProductCard extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () {
-                        cartManager.addToCart(product);
-
+                        //cartManager.addToCart(product);
+                        showAddToCartPopup(context, product);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('${product.name} added to cart'),

@@ -18,6 +18,16 @@ class CartManager {
     }
   }
 
+  void addToCartwithQuantity(dynamic product, int quantity) {
+    final index = cart.indexWhere((item) => item['product'].id == product.id);
+
+    if (index != -1) {
+      cart[index]['qty'] = cart[index]['qty'] + quantity;
+    } else {
+      cart.add({'product': product, 'qty': 0 + quantity});
+    }
+  }
+
   void removeFromCart(dynamic product) {
     cart.removeWhere((item) => item['product'] == product);
   }
