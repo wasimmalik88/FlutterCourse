@@ -362,20 +362,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 Text(
-                                  'Get 20% off',
+                                  'Modular Headphone',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 6),
-                                Text(
-                                  'on your first order',
-                                  style: TextStyle(color: Colors.white70),
-                                ),
-                                SizedBox(height: 12),
-                                Chip(label: Text('Use: WELCOME20')),
                               ],
                             ),
                           ),
@@ -383,7 +376,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 90,
                             height: 90,
                             child: Image.network(
-                              'https://cdn-icons-png.freepik.com/256/9015/9015502.png?semt=ais_white_label',
+                              'https://i.ibb.co/ynNrNG61/8006f97acb3899e7059c3bb4c6a0cfd8521207bd.png',
                               fit: BoxFit.contain,
                             ),
                           ),
