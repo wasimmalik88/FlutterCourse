@@ -138,12 +138,29 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Medical App Login')),
+      appBar: AppBar(title: const Text('Rainbow Mall')),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Text(
+                  'Welcome back to Rainbow Mall',
+                  style: TextStyle(fontSize: 24.0),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 100),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Text('Email', style: TextStyle(fontSize: 16.0)),
+              ),
+            ),
             TextField(
               controller: _usernamecontroller,
               decoration: const InputDecoration(
@@ -151,6 +168,13 @@ class _MessagePageState extends State<MessagePage> {
                 border: OutlineInputBorder(),
               ),
             ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Text('Password', style: TextStyle(fontSize: 16.0)),
+              ),
+            ),
+
             const SizedBox(height: 10),
             TextField(
               controller: _passwordcontroller,

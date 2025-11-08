@@ -24,7 +24,10 @@ class ProductDetailScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black87),
-        title: const Text('Product', style: TextStyle(color: Colors.black87)),
+        title: const Text(
+          'Product Detail',
+          style: TextStyle(color: Colors.black87),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,7 +62,29 @@ class ProductDetailScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
 
+            const SizedBox(height: 4),
+            Text(
+              '${product.price.toStringAsFixed(2)} Rs',
+              style: const TextStyle(
+                color: Colors.redAccent,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 10),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.star, color: Colors.amber, size: 20),
+                SizedBox(width: 4),
+                Text(
+                  '4.6   86 Reviews',
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
 
             Text(
               product.desc.isNotEmpty

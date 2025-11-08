@@ -94,11 +94,26 @@ class ProductCard extends StatelessWidget {
                   Text(
                     '${product.price.toStringAsFixed(2)} Rs',
                     style: const TextStyle(
-                      color: Colors.teal,
+                      color: Colors.redAccent,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+
                   const SizedBox(height: 6),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.star, color: Colors.amber, size: 20),
+                      SizedBox(width: 4),
+                      Text(
+                        '4.6   86 Reviews',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(

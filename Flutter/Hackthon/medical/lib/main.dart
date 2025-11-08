@@ -24,7 +24,7 @@ class MedicalStoreApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Medical Store',
+      title: 'Rainbow Mall',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         scaffoldBackgroundColor: const Color(0xFFF7F9FB),
@@ -95,7 +95,10 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Medical Store"),
+        title: const Text(
+          "Rainbow Mall",
+          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             onPressed: _logout,
