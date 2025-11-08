@@ -445,7 +445,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           //trailing: Text("2 days ago"),
                         ),
-                        SizedBox(height: 20),
+                        Divider(
+                          height: 20,
+                          thickness: 1,
+                          color: Colors.grey,
+                          indent: 16,
+                          endIndent: 16,
+                        ),
                         ListTile(
                           trailing: SizedBox(
                             height: 250.0,
