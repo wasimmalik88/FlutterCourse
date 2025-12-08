@@ -2,9 +2,11 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tools/screens/HomeScreen.dart';
+import 'package:tools/screens/biometeric.dart';
 
 import 'package:tools/screens/qrscan.dart';
 import 'package:tools/screens/sound.dart';
+import 'package:tools/screens/webview.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -39,7 +41,7 @@ class LoginScreen extends StatelessWidget {
               ),
               child: const Text("Log in"),
             ),
-            const SizedBox(height: 30),
+
             ElevatedButton(
               onPressed: () {
                 Get.to(MobileScannerSimple());
@@ -49,7 +51,7 @@ class LoginScreen extends StatelessWidget {
               ),
               child: const Text("QR Code"),
             ),
-            const SizedBox(height: 30),
+
             ElevatedButton(
               onPressed: () {
                 Get.to(SimpleRecorder());
@@ -99,6 +101,26 @@ class LoginScreen extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 50),
               ),
               child: const Text("Awsome Notification"),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Get.to(MyApp());
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+              ),
+              child: const Text("Biometeric"),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                Get.to(WebViewExample());
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+              ),
+              child: const Text("Webview"),
             ),
           ],
         ),

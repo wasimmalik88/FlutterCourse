@@ -40,6 +40,8 @@ dependencies:
   flutter_sound: ^9.30.0
   audio_session: ^0.2.2
   awesome_notifications: ^0.10.1
+  local_auth: ^3.0.0
+  webview_flutter: ^4.13.0
 
 dev_dependencies:
   flutter_test:
